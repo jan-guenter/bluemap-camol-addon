@@ -1,0 +1,6 @@
+{
+  "id": "bluemap-camol",
+  "entrypoint": "io.github.janguenter.bluemap.camol.BlueMapCamolAddon",
+  "dependencies": [],
+  "soft-dependencies": []
+}
