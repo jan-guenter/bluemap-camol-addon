@@ -68,7 +68,7 @@ jobs:
         with:
           gradle-version: '9.6.1'
 
-      - name: Build and verify accepted bytes
+      - name: Build and verify candidate bytes
         run: |
           python3 -m json.tool provenance/upstreams.json >/dev/null
           gradle --no-daemon \
@@ -77,16 +77,16 @@ jobs:
             generateMetadataFileForAddonPublication
           test "$(stat -c %s \
             "build/libs/bluemap-camol-addon-${VERSION}-sources.jar")" \
-            -eq 14722
+            -eq 14889
           test "$(stat -c %s build/publications/addon/pom-default.xml)" \
             -eq 1326
           test "$(stat -c %s build/publications/addon/module.json)" \
             -eq 2803
           sha256sum --check <<SHA256SUMS
-          b107291040c1816e209929db37bc2871e25b9b7ab128ec2cc58f1cceaf47db53  build/libs/bluemap-camol-addon-${VERSION}.jar
-          0b9f0a61843aefb27da5e0a5ee4279834a36ba6040b5cb9b9a028484cb09bb67  build/libs/bluemap-camol-addon-${VERSION}-sources.jar
-          3f946009858f5c2c1a85d8aae0607e2d5a17bfa6de12069bc8bfb6f30a8cae72  build/publications/addon/pom-default.xml
-          d15f996e530a0885bea72a2a482797d2a76eabad6b75e012fb3eac34796b209d  build/publications/addon/module.json
+          2c707f0cb1e8ebbef735f3afeae818e9154029a4d3892c58a737ae75891d197b  build/libs/bluemap-camol-addon-${VERSION}.jar
+          7962b84ad72f3b54ef65f5c84d95db86799ca96cdb613bf1572232f234624ba8  build/libs/bluemap-camol-addon-${VERSION}-sources.jar
+          ad79cfab87c43d203d2eb664a2e5e1d563cf1251cf38594826a143342b023b84  build/publications/addon/pom-default.xml
+          ab35ac9c5b4fbb245fa6a8bbaf3cf5b54a04833a80c35f817630266220d4de09  build/publications/addon/module.json
           SHA256SUMS
 
       - name: Prepare release bundle
@@ -102,7 +102,7 @@ jobs:
           (cd release && sha256sum --check SHA256SUMS)
           test "$(stat -c %s release/SHA256SUMS)" -eq 440
           test "$(sha256sum release/SHA256SUMS | cut -d ' ' -f 1)" = \
-            f65a6d4633816f4d74e6fb277817ee0374a91444970cf6b7ba16b771ecb799ca
+            b0d7de6ab0156faea445b1333a090075ac6de41d2548b97d01af0e2f0c017863
 
       - name: Create or refresh draft release
         env:
