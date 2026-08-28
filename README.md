@@ -6,10 +6,11 @@ A small exact-profile BlueMap 5.22 add-on for Camol's persisted camouflage.
 
 ## Status and compatibility
 
-Version `0.1.0-alpha.1` is the owner-accepted prerelease for this exact
-environment. Its production JAR is 32,265 bytes with SHA-256
-`b107291040c1816e209929db37bc2871e25b9b7ab128ec2cc58f1cceaf47db53`.
-Compatibility outside these inputs is not asserted.
+Version `0.1.0-alpha.2` is the aggregate-test release candidate for this exact
+environment. Its production JAR is 32,587 bytes with SHA-256
+`2c707f0cb1e8ebbef735f3afeae818e9154029a4d3892c58a737ae75891d197b`.
+Compatibility outside these inputs is not asserted. Version `0.1.0-alpha.1`
+remains the latest owner-accepted release until aggregate testing finishes.
 
 ## Visual scope
 
@@ -27,6 +28,11 @@ file BlueMap is rendering, preserves the ordinary host model, then overlays
 the saved camouflage block model at Camol's `1.005` scale. `normal` and
 `solid` affect collision only and intentionally render identically.
 
+BlueMap does not define an order for resource-pack extension `bake()` calls.
+Camol therefore waits for the first block-state or block-property lookup,
+after the bake phase, before it wraps variants. This preserves custom renderer
+choices made by the other add-ons while keeping the Camol overlay outermost.
+
 Missing Camol, a different artifact, malformed data, AIR tombstones, or a
 region read race leaves stock BlueMap rendering unchanged. The add-on writes
 nothing to the world.
@@ -39,14 +45,14 @@ gradle --no-daemon clean check build \
   generateMetadataFileForAddonPublication
 ```
 
-`check` rejects any production JAR that differs from the owner-accepted size
-or SHA-256. Tagged releases publish production/source JARs, POM, Gradle module
+`check` rejects any production JAR that differs from the recorded candidate
+size or SHA-256. Tagged releases publish production/source JARs, POM, Gradle module
 metadata, and checksums on GitHub Releases and Maven coordinates
 `io.github.jan-guenter:bluemap-camol-addon:<version>` on GitHub Packages.
 
 ## Installation
 
-Place `build/libs/bluemap-camol-addon-0.1.0-alpha.1.jar` in
+Place `build/libs/bluemap-camol-addon-0.1.0-alpha.2.jar` in
 `config/bluemap/packs` and restart BlueMap. Keep the exact Camol JAR available
 to BlueMap's resource-pack scan. Do not place this add-on in `mods`.
 

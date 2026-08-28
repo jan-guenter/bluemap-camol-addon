@@ -8,7 +8,8 @@
       "commit": "9be321df995a1103808621d529eb72773e719d4d",
       "license": "MIT",
       "lane": "runtime-interface",
-      "bundled": false
+      "bundled": false,
+      "note": "ResourcePack keeps extensions in an unordered map. The add-on uses the first post-load block-state or block-property callback as the boundary after all extension bake calls."
     },
     {
       "name": "Camol",

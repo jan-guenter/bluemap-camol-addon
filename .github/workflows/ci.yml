@@ -44,7 +44,7 @@ jobs:
           gradle-version: '9.6.1'
           cache-read-only: ${{ github.event_name == 'pull_request' }}
 
-      - name: Validate provenance and accepted artifact
+      - name: Validate provenance and candidate artifact
         run: |
           python3 -m json.tool provenance/upstreams.json >/dev/null
           gradle --no-daemon \
