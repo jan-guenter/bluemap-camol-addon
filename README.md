@@ -39,6 +39,17 @@ nothing to the world.
 
 ## Build and verification
 
+Clone with submodules so the exact reviewed build convention is available:
+
+```bash
+git clone --recurse-submodules \
+  https://github.com/jan-guenter/bluemap-camol-addon.git
+```
+
+For an existing checkout, run `git submodule update --init --recursive`. The
+build rejects an uninitialized, dirty, or incorrectly pinned toolkit
+submodule.
+
 ```bash
 gradle --no-daemon clean check build \
   generatePomFileForAddonPublication \
