@@ -2,23 +2,32 @@
 
 [![CI](https://github.com/jan-guenter/bluemap-camol-addon/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/jan-guenter/bluemap-camol-addon/actions/workflows/ci.yml)
 
-A small exact-profile BlueMap 5.22 add-on for Camol's persisted camouflage.
+A small exact-profile BlueMap 5.23 feature-backport add-on for Camol's
+persisted camouflage.
 
 ## Status and compatibility
 
-Version `0.1.0-alpha.2` is the aggregate-test release candidate for this exact
-environment. Its production JAR is 32,587 bytes with SHA-256
-`2c707f0cb1e8ebbef735f3afeae818e9154029a4d3892c58a737ae75891d197b`.
-Compatibility outside these inputs is not asserted. Version `0.1.0-alpha.1`
-remains the latest owner-accepted release until aggregate testing finishes.
+Version `0.1.0-alpha.3` is an owner-accepted BlueMap 5.23 release candidate.
+It keeps the `0.1.0-alpha.2` renderer and post-bake wrapping behavior while
+moving the internal adapter boundary and shared bootstrap helpers. It also
+restores the original renderer identity on the delegated variant so
+identity-sensitive renderers from other add-ons remain active beneath Camol.
+Compatibility outside the exact inputs below is not asserted. Version
+`0.1.0-alpha.2` remains the latest published release.
+
+The exact Gradle 9.6.1 release artifacts and the passing 51-gallery aggregate
+runtime evidence are sealed in `provenance/release.json`. The candidate is not
+yet published.
 
 ## Visual scope
 
 The add-on targets only:
 
 - All the Mons `1.2.0`, Minecraft `1.21.1`, NeoForge `21.1.248`, Java 21;
-- BlueMap backport `5.22-agent.backport-5.22-mc1.21.1-2` at commit
-  `9be321df995a1103808621d529eb72773e719d4d`;
+- BlueMap feature backport
+  `5.22-feature.backport-5.23-stateless-java-web-server-46` at commit
+  `7e07f4e74ec1e92a6ead9aa1e66054af3e133aac` with API commit
+  `285c9a60eff3ac2b0cab308ce1058d1565be0971`;
 - Camol `1.21.1-0.3.1`, exact JAR SHA-256
   `aafdbe962a4bbab97207f747ec52561ea34be9c49a4b044a835da82ff7d45609`.
 
@@ -32,6 +41,9 @@ BlueMap does not define an order for resource-pack extension `bake()` calls.
 Camol therefore waits for the first block-state or block-property lookup,
 after the bake phase, before it wraps variants. This preserves custom renderer
 choices made by the other add-ons while keeping the Camol overlay outermost.
+When delegating, Camol supplies a copy of the resource variant carrying that
+original renderer identity. This preserves renderers that validate ownership
+through the variant itself.
 
 Missing Camol, a different artifact, malformed data, AIR tombstones, or a
 region read race leaves stock BlueMap rendering unchanged. The add-on writes
@@ -47,23 +59,28 @@ git clone --recurse-submodules \
 ```
 
 For an existing checkout, run `git submodule update --init --recursive`. The
-build rejects an uninitialized, dirty, or incorrectly pinned toolkit
-submodule.
+build rejects an uninitialized, dirty, incorrectly pinned, or source-tree
+mismatched toolkit or Adapter API checkout.
 
 ```bash
-gradle --no-daemon clean check build \
+gradle --no-daemon \
+  -PbluemapSourcePath=/path/to/exact/bluemap-backport \
+  -PcamolJar=/path/to/camol-1.21.1-0.3.1.jar \
+  clean prototypeCheck build \
   generatePomFileForAddonPublication \
   generateMetadataFileForAddonPublication
 ```
 
-`check` rejects any production JAR that differs from the recorded candidate
-size or SHA-256. Tagged releases publish production/source JARs, POM, Gradle module
-metadata, and checksums on GitHub Releases and Maven coordinates
+`check` validates the production and sources archive boundaries.
+`prototypeCheck` also verifies the exact Camol artifact and gallery. The two
+archives compile the four pinned Adapter API sources directly and never nest
+its standalone JAR. Tagged releases publish production/source JARs, POM,
+Gradle module metadata, and checksums on GitHub Releases and Maven coordinates
 `io.github.jan-guenter:bluemap-camol-addon:<version>` on GitHub Packages.
 
 ## Installation
 
-Place `build/libs/bluemap-camol-addon-0.1.0-alpha.2.jar` in
+Place `build/libs/bluemap-camol-addon-0.1.0-alpha.3.jar` in
 `config/bluemap/packs` and restart BlueMap. Keep the exact Camol JAR available
 to BlueMap's resource-pack scan. Do not place this add-on in `mods`.
 

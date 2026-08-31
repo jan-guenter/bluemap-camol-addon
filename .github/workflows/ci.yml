@@ -9,6 +9,9 @@ on:
 permissions:
   contents: read
 
+env:
+  PROMOTION_JAVA_VERSION: '21.0.12+8.0.LTS'
+
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -16,7 +19,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 40
     steps:
       - name: Check out add-on
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -28,35 +31,61 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: jan-guenter/BlueMap
-          ref: 9be321df995a1103808621d529eb72773e719d4d
+          ref: 7e07f4e74ec1e92a6ead9aa1e66054af3e133aac
           path: .ci/bluemap
           submodules: recursive
+          fetch-depth: 0
           persist-credentials: false
 
-      - name: Set up Java 21
+      - name: Verify exact detached BlueMap identities
+        run: |
+          test "$(git -C .ci/bluemap rev-parse --abbrev-ref HEAD)" = "HEAD"
+          test "$(git -C .ci/bluemap rev-parse HEAD)" = \
+            "7e07f4e74ec1e92a6ead9aa1e66054af3e133aac"
+          test "$(git -C .ci/bluemap/api rev-parse HEAD)" = \
+            "285c9a60eff3ac2b0cab308ce1058d1565be0971"
+
+      - name: Set up exact promotion Java 21
         uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5.7.0
         with:
           distribution: temurin
-          java-version: '21'
+          java-version: ${{ env.PROMOTION_JAVA_VERSION }}
 
       - name: Set up Gradle 9.6.1
         uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
         with:
           gradle-version: '9.6.1'
+          cache-provider: basic
           cache-read-only: ${{ github.event_name == 'pull_request' }}
+          validate-wrappers: true
 
-      - name: Validate provenance and candidate artifact
+      - name: Acquire exact ephemeral Camol input
+        run: |
+          input_dir="${RUNNER_TEMP}/exact-inputs"
+          mkdir -p "${input_dir}"
+          curl --fail --location --retry 3 --retry-all-errors \
+            --output "${input_dir}/camol-1.21.1-0.3.1.jar" \
+            "https://www.curseforge.com/api/v1/mods/1214396/files/7976624/download"
+          test "$(stat -c %s "${input_dir}/camol-1.21.1-0.3.1.jar")" -eq 62188
+          sha256sum --check <<SHA256SUMS
+          aafdbe962a4bbab97207f747ec52561ea34be9c49a4b044a835da82ff7d45609  ${input_dir}/camol-1.21.1-0.3.1.jar
+          SHA256SUMS
+
+      - name: Verify exact migration candidate
         run: |
           python3 -m json.tool provenance/upstreams.json >/dev/null
+          python3 -m json.tool provenance/release.json >/dev/null
+          input_dir="${RUNNER_TEMP}/exact-inputs"
           gradle --no-daemon \
             -PbluemapSourcePath=.ci/bluemap \
-            clean check build generatePomFileForAddonPublication \
+            -PcamolJar="${input_dir}/camol-1.21.1-0.3.1.jar" \
+            clean prototypeCheck build generatePomFileForAddonPublication \
             generateMetadataFileForAddonPublication
 
       - name: Upload review outputs
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: bluemap-camol-${{ github.sha }}
+          name: bluemap-camol-addon-${{ github.sha }}
           path: |
             build/libs/*.jar
             build/publications/addon/pom-default.xml
