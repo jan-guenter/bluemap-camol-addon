@@ -17,6 +17,7 @@ import de.bluecolored.bluemap.core.util.math.Color;
 import de.bluecolored.bluemap.core.world.BlockState;
 import de.bluecolored.bluemap.core.world.block.BlockNeighborhood;
 
+import java.util.Collections;
 import java.util.IdentityHashMap;
 import java.util.Map;
 
@@ -36,6 +37,8 @@ final class CamolRenderer implements BlockRenderer {
     private final TextureGallery textures;
     private final RenderSettings settings;
     private final Map<BlockRendererType, BlockRenderer> originalRenderers = new IdentityHashMap<>();
+    private final Map<Variant, Variant> originalVariants =
+            Collections.synchronizedMap(new IdentityHashMap<>());
     private final ThreadLocal<Visit> visits = ThreadLocal.withInitial(Visit::new);
     private volatile CamolAttachmentReader attachments;
     private volatile BlockStateModelRenderer stateRenderer;
@@ -83,10 +86,16 @@ final class CamolRenderer implements BlockRenderer {
             BlockRendererType originalType = catalog == null
                     ? BlockRendererType.DEFAULT
                     : catalog.original(variant);
+            Variant originalVariant = variant.getRenderer() == originalType
+                    ? variant
+                    : originalVariants.computeIfAbsent(
+                            variant,
+                            ignored -> withRenderer(variant, originalType)
+                    );
             originalRenderers.computeIfAbsent(
                     originalType,
                     type -> type.create(resourcePack, textures, settings)
-            ).render(block, variant, target, mapColor);
+            ).render(block, originalVariant, target, mapColor);
             runtime.trace("host-render-complete");
         } catch (StackOverflowError error) {
             failHost(block, variant, target, mapColor, hostStart, "host-render-stack", error);
@@ -237,6 +246,19 @@ final class CamolRenderer implements BlockRenderer {
             target.getTileModel().reset(overlayStart);
             target.initialize(overlayStart);
         }
+    }
+
+    static Variant withRenderer(Variant source, BlockRendererType renderer) {
+        Variant copy = new Variant(
+                source.getModel(),
+                source.getX(),
+                source.getY(),
+                source.getZ(),
+                source.isUvlock(),
+                source.getWeight()
+        );
+        copy.setRenderer(renderer);
+        return copy;
     }
 
     /** Suppresses duplicate overlay emission for multipart host blockstates. */

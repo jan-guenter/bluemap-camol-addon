@@ -9,12 +9,14 @@ persisted camouflage.
 
 Version `0.1.0-alpha.3` is an unpublished BlueMap 5.23 migration candidate.
 It keeps the `0.1.0-alpha.2` renderer and post-bake wrapping behavior while
-moving only the internal adapter boundary and shared bootstrap helpers.
+moving the internal adapter boundary and shared bootstrap helpers. It also
+restores the original renderer identity on the delegated variant so
+identity-sensitive renderers from other add-ons remain active beneath Camol.
 Compatibility outside the exact inputs below is not asserted. Version
 `0.1.0-alpha.1` remains the latest owner-accepted release.
 
-The exact Gradle 9.6.1 migration-candidate JAR is 70,800 bytes with SHA-256
-`cff9aada3d5637f8bdda4ccaae0bf2619697faecb761a870e8a365d9d6667e49`.
+The exact Gradle 9.6.1 migration-candidate JAR identity is recorded in
+`provenance/release.json`.
 It is not a published release and still requires aggregate runtime acceptance.
 
 ## Visual scope
@@ -39,6 +41,9 @@ BlueMap does not define an order for resource-pack extension `bake()` calls.
 Camol therefore waits for the first block-state or block-property lookup,
 after the bake phase, before it wraps variants. This preserves custom renderer
 choices made by the other add-ons while keeping the Camol overlay outermost.
+When delegating, Camol supplies a copy of the resource variant carrying that
+original renderer identity. This preserves renderers that validate ownership
+through the variant itself.
 
 Missing Camol, a different artifact, malformed data, AIR tombstones, or a
 region read race leaves stock BlueMap rendering unchanged. The add-on writes

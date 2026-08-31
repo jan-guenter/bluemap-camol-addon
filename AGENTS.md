@@ -12,8 +12,9 @@ NeoForge `21.1.248`, BlueMap feature backport
 `aafdbe962a4bbab97207f747ec52561ea34be9c49a4b044a835da82ff7d45609`.
 Release `0.1.0-alpha.1` is 32,265 bytes with SHA-256
 `b107291040c1816e209929db37bc2871e25b9b7ab128ec2cc58f1cceaf47db53`.
-The unpublished `0.1.0-alpha.3` candidate migrates only the BlueMap adapter
-boundary. It compiles the four Adapter API `0.1.0-alpha.2` sources from commit
+The unpublished `0.1.0-alpha.3` candidate migrates the BlueMap adapter
+boundary and restores original renderer identity during host delegation. It
+compiles the four Adapter API `0.1.0-alpha.2` sources from commit
 `e81f08bc4bfbf02d810ec8949a019130e2e61634` and source tree
 `2f974c9bb2ba13888d69682f86f30f58922d30eb`.
 
@@ -25,7 +26,8 @@ Minecraft, models, textures, source, worlds, or private fixtures.
 Camol must install its global renderer wrapper only after all resource-pack
 extensions have baked. Use the first block-state or block-property callback as
 that boundary, keep initialization synchronized and idempotent, and preserve
-the final renderer assigned by another add-on as the original renderer.
+the final renderer assigned by another add-on as the original renderer. Pass a
+variant carrying that original renderer identity to the delegated renderer.
 
 Use Java 21 and initialize both pinned submodules. Run Gradle 9.6.1 with the
 exact `camolJar` and `bluemapSourcePath` properties through `prototypeCheck`,

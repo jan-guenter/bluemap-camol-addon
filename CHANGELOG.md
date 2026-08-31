@@ -6,6 +6,8 @@
 - Move the local adapter boundary from `bluemap522` to `bluemap523`.
 - Compile the four pinned Adapter API `0.1.0-alpha.2` sources and remove the
   duplicate compatibility, extension-factory, and registry helpers.
+- Restore the original renderer identity on delegated variants so Camol stays
+  compatible with identity-sensitive renderers from other add-ons.
 - Keep persisted attachment decoding, post-bake wrapping, Camol overlay
   geometry, gallery sources, and stock fallback unchanged.
 

@@ -11,13 +11,13 @@
   "candidate_artifacts": {
     "production_jar": {
       "file_name": "bluemap-camol-addon-0.1.0-alpha.3.jar",
-      "size": 70800,
-      "sha256": "cff9aada3d5637f8bdda4ccaae0bf2619697faecb761a870e8a365d9d6667e49"
+      "size": 72737,
+      "sha256": "afd10b6b7f072fb4194782f4274dfad78732cb4230772f64620c1bb4a46bceba"
     },
     "sources_jar": {
       "file_name": "bluemap-camol-addon-0.1.0-alpha.3-sources.jar",
-      "size": 50147,
-      "sha256": "48a0bab4de92d2d5c7c96428d61f4f51ddf3648c85b2eddf047300229b3235e0"
+      "size": 50994,
+      "sha256": "38a4a79ca8cba664371fb265f7a1e9da113586da027ffd8127ca994f7bfdc3ea"
     },
     "pom": {
       "file_name": "bluemap-camol-addon-0.1.0-alpha.3.pom",
@@ -27,7 +27,7 @@
     "gradle_module": {
       "file_name": "bluemap-camol-addon-0.1.0-alpha.3.module.json",
       "size": 2803,
-      "sha256": "69049aa5ad6b8d7bdd4d5cd028c3adb33a36b115bde4d040615ff44f48e54a8c"
+      "sha256": "f67710289f3dc60cf08b92f65858b2249c4113f3aa99983e0cb658b3e19b7fd0"
     }
   },
   "baseline": {
@@ -69,6 +69,7 @@
     "normal_and_solid_render_equivalence_changed": false,
     "post_bake_wrapper_timing_changed": false,
     "renderer_overlay_behavior_changed": false,
+    "delegated_variant_renderer_identity_restored": true,
     "gallery_sources_changed": false,
     "gallery_tree": "7db3ef119ff521f83f5cea6ff8c8a94f58dcbded",
     "stock_fallback_changed": false
