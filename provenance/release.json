@@ -1,13 +1,12 @@
 {
   "schema_version": 1,
-  "status": "unpublished-migration-candidate",
+  "status": "owner-accepted-release-candidate",
   "version": "0.1.0-alpha.3",
   "release_date": "2026-08-31",
   "repository": "https://github.com/jan-guenter/bluemap-camol-addon",
   "tag": "v0.1.0-alpha.3",
   "maven_coordinate": "io.github.jan-guenter:bluemap-camol-addon:0.1.0-alpha.3",
   "published": false,
-  "owner_acceptance": "required",
   "candidate_artifacts": {
     "production_jar": {
       "file_name": "bluemap-camol-addon-0.1.0-alpha.3.jar",
@@ -36,7 +35,7 @@
     "release_tree": "eb2312257ae502122dec84dc6e47a8b7a8b5b6a1",
     "production_jar_size": 32587,
     "production_jar_sha256": "2c707f0cb1e8ebbef735f3afeae818e9154029a4d3892c58a737ae75891d197b",
-    "acceptance_status": "aggregate-runtime-acceptance-required"
+    "acceptance_status": "published-prerelease-superseded-by-alpha.3"
   },
   "exact_feature_backport_migration": {
     "bluemap_version": "5.22-feature.backport-5.23-stateless-java-web-server-46",
@@ -80,11 +79,88 @@
     "sources_archive_boundary_gate": true,
     "adapter_api_migration_boundary_gate": true,
     "exact_feature_backport_runtime_identity_gate": true,
-    "gradle_9_6_1_clean_builds": 2,
+    "gradle_9_6_1_clean_builds": 3,
     "consumer_tests_passed": 4,
     "package_normalized_preserved_class_bytecode": "11/11",
     "gallery_integrity": true,
     "checkstyle": true,
-    "actionlint": true
+    "actionlint": true,
+    "release_candidate_gate": true,
+    "staged_candidate_attestation": true,
+    "aggregate_runtime_suite": true
+  },
+  "owner_accepted_staging": {
+    "visual_acceptance": true,
+    "accepted_on": "2026-08-31",
+    "scope": "Owner accepted the five-add-on aggregate batch after Camol preserved delegated renderer identity, including the corrected connected reactor glass and internal block colors.",
+    "integration_run": "bluemap-atmons-integration-20260831-tech-batch-523-native",
+    "candidate_manifest": {
+      "sha256": "d56506092a186d5dc90157d952b4eb7db2c05ddeca18d7f3d7fc66b423ded81e",
+      "local_candidate_base_source_commit": "0f32b3d4341e0816c22ad4f7e3109c9f8e36131f",
+      "local_candidate_base_source_tree": "0083023fa0e9df8f7d7f7728a63ed10a4194f3f6",
+      "local_candidate_base_artifact": {
+        "file_name": "bluemap-camol-addon-0.1.0-alpha.3.jar",
+        "size": 72737,
+        "sha256": "afd10b6b7f072fb4194782f4274dfad78732cb4230772f64620c1bb4a46bceba"
+      },
+      "aggregate_staging_artifact": {
+        "file_name": "bluemap-camol-addon-0.1.0-alpha.2.jar",
+        "size": 73097,
+        "sha256": "d8f304017aaf6d6829f3e0e4447098524e1e39729c9c7b16611f9dbd752a7ee1"
+      }
+    },
+    "runtime_suite": {
+      "file_name": "runtime-suite-final-fix.json",
+      "sha256": "b3db08457b4ff554ee6a3ee0ecd332a2589b306ebdc3862f64cd6946bb3f9950",
+      "finished_at": "2026-08-31T15:21:23.827828Z",
+      "status": "passed",
+      "gallery_count": 51,
+      "passed": 51,
+      "failed": 0,
+      "candidate_pack_inventory_sha256": "9c91fcc2c7544b11181a7902059fef868f5d34029a32ced7c0d30a05daff225b",
+      "runtime_attestation_sha256": "5d3cbea66372336766d64f201672917670f8723da7e36f1631fda0b5b1f010fd",
+      "camol_verification": {
+        "status": "passed",
+        "mirrored_checks": 1,
+        "pre_verification_failures": 0,
+        "failures": 0
+      }
+    },
+    "gallery_render": {
+      "map_id": "atmons_integration",
+      "composition_id": "4c1139e67bee1f570824ac90bdc12a4331381946acf4cd593609c51c3a4c894a",
+      "layout_sha256": "5ea9a96c5e5b159057441a6eb6fbfdbf47aa06b95dadfcb2756246b117a04944",
+      "fresh_tile_evidence_sha256": "a9d997a033aa422cab225fbf058a25a4011e06c25889121770f9378edba0c69b",
+      "region_count": 4,
+      "tile_count": 589
+    },
+    "browser_capture": {
+      "state_sha256": "cbc1a6517f8979539b36e129145a6470ecba7a14f557240c8da4fef54db41104",
+      "screenshot_sha256": "0d962afc4cef23650cd41387e83864503cdf21d889baed37d5d5761bc4ea5b0b",
+      "navigation_status": 200,
+      "context_lost": false
+    }
+  },
+  "final_release_artifacts": {
+    "production_jar": {
+      "file_name": "bluemap-camol-addon-0.1.0-alpha.3.jar",
+      "size": 72737,
+      "sha256": "afd10b6b7f072fb4194782f4274dfad78732cb4230772f64620c1bb4a46bceba"
+    },
+    "sources_jar": {
+      "file_name": "bluemap-camol-addon-0.1.0-alpha.3-sources.jar",
+      "size": 50994,
+      "sha256": "38a4a79ca8cba664371fb265f7a1e9da113586da027ffd8127ca994f7bfdc3ea"
+    },
+    "pom": {
+      "file_name": "bluemap-camol-addon-0.1.0-alpha.3.pom",
+      "size": 1326,
+      "sha256": "595760f1374359d42a8bb2380d4df95d834be8d8b603fa6b9e1bc0f5efbcf412"
+    },
+    "gradle_module": {
+      "file_name": "bluemap-camol-addon-0.1.0-alpha.3.module.json",
+      "size": 2803,
+      "sha256": "f67710289f3dc60cf08b92f65858b2249c4113f3aa99983e0cb658b3e19b7fd0"
+    }
   }
 }

@@ -12,9 +12,12 @@ NeoForge `21.1.248`, BlueMap feature backport
 `aafdbe962a4bbab97207f747ec52561ea34be9c49a4b044a835da82ff7d45609`.
 Release `0.1.0-alpha.1` is 32,265 bytes with SHA-256
 `b107291040c1816e209929db37bc2871e25b9b7ab128ec2cc58f1cceaf47db53`.
-The unpublished `0.1.0-alpha.3` candidate migrates the BlueMap adapter
-boundary and restores original renderer identity during host delegation. It
-compiles the four Adapter API `0.1.0-alpha.2` sources from commit
+The owner-accepted `0.1.0-alpha.3` release candidate is 72,737 bytes with
+SHA-256
+`afd10b6b7f072fb4194782f4274dfad78732cb4230772f64620c1bb4a46bceba`.
+It migrates the BlueMap adapter boundary and restores original renderer
+identity during host delegation. It compiles the four Adapter API
+`0.1.0-alpha.2` sources from commit
 `e81f08bc4bfbf02d810ec8949a019130e2e61634` and source tree
 `2f974c9bb2ba13888d69682f86f30f58922d30eb`.
 
@@ -32,6 +35,7 @@ variant carrying that original renderer identity to the delegated renderer.
 Use Java 21 and initialize both pinned submodules. Run Gradle 9.6.1 with the
 exact `camolJar` and `bluemapSourcePath` properties through `prototypeCheck`,
 `build`, POM generation, and module-metadata generation.
-Owner visual acceptance is required before release. Version `0.1.0-alpha.1`
-was accepted on 2026-08-18; `0.1.0-alpha.2` still requires aggregate runtime
-acceptance.
+Version `0.1.0-alpha.3` was accepted on 2026-08-31 in the combined BlueMap
+5.23 staging view and passed the final 51-gallery aggregate runtime suite.
+Release still requires the sealed `verifyReleaseCandidate` gate and a reviewed
+pull request.

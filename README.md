@@ -7,17 +7,17 @@ persisted camouflage.
 
 ## Status and compatibility
 
-Version `0.1.0-alpha.3` is an unpublished BlueMap 5.23 migration candidate.
+Version `0.1.0-alpha.3` is an owner-accepted BlueMap 5.23 release candidate.
 It keeps the `0.1.0-alpha.2` renderer and post-bake wrapping behavior while
 moving the internal adapter boundary and shared bootstrap helpers. It also
 restores the original renderer identity on the delegated variant so
 identity-sensitive renderers from other add-ons remain active beneath Camol.
 Compatibility outside the exact inputs below is not asserted. Version
-`0.1.0-alpha.1` remains the latest owner-accepted release.
+`0.1.0-alpha.2` remains the latest published release.
 
-The exact Gradle 9.6.1 migration-candidate JAR identity is recorded in
-`provenance/release.json`.
-It is not a published release and still requires aggregate runtime acceptance.
+The exact Gradle 9.6.1 release artifacts and the passing 51-gallery aggregate
+runtime evidence are sealed in `provenance/release.json`. The candidate is not
+yet published.
 
 ## Visual scope
 
