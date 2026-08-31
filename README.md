@@ -13,6 +13,10 @@ moving only the internal adapter boundary and shared bootstrap helpers.
 Compatibility outside the exact inputs below is not asserted. Version
 `0.1.0-alpha.1` remains the latest owner-accepted release.
 
+The exact Gradle 9.6.1 migration-candidate JAR is 70,800 bytes with SHA-256
+`cff9aada3d5637f8bdda4ccaae0bf2619697faecb761a870e8a365d9d6667e49`.
+It is not a published release and still requires aggregate runtime acceptance.
+
 ## Visual scope
 
 The add-on targets only:

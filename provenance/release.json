@@ -11,23 +11,23 @@
   "candidate_artifacts": {
     "production_jar": {
       "file_name": "bluemap-camol-addon-0.1.0-alpha.3.jar",
-      "size": 0,
-      "sha256": "PENDING"
+      "size": 70800,
+      "sha256": "cff9aada3d5637f8bdda4ccaae0bf2619697faecb761a870e8a365d9d6667e49"
     },
     "sources_jar": {
       "file_name": "bluemap-camol-addon-0.1.0-alpha.3-sources.jar",
-      "size": 0,
-      "sha256": "PENDING"
+      "size": 50147,
+      "sha256": "48a0bab4de92d2d5c7c96428d61f4f51ddf3648c85b2eddf047300229b3235e0"
     },
     "pom": {
       "file_name": "bluemap-camol-addon-0.1.0-alpha.3.pom",
-      "size": 0,
-      "sha256": "PENDING"
+      "size": 1326,
+      "sha256": "595760f1374359d42a8bb2380d4df95d834be8d8b603fa6b9e1bc0f5efbcf412"
     },
     "gradle_module": {
       "file_name": "bluemap-camol-addon-0.1.0-alpha.3.module.json",
-      "size": 0,
-      "sha256": "PENDING"
+      "size": 2803,
+      "sha256": "69049aa5ad6b8d7bdd4d5cd028c3adb33a36b115bde4d040615ff44f48e54a8c"
     }
   },
   "baseline": {
@@ -74,15 +74,16 @@
     "stock_fallback_changed": false
   },
   "verification": {
-    "exact_input_gate": false,
-    "production_archive_boundary_gate": false,
-    "sources_archive_boundary_gate": false,
-    "adapter_api_migration_boundary_gate": false,
-    "exact_feature_backport_runtime_identity_gate": false,
-    "gradle_9_6_1_clean_builds": 0,
-    "consumer_tests_passed": 0,
-    "gallery_integrity": false,
-    "checkstyle": false,
-    "actionlint": false
+    "exact_input_gate": true,
+    "production_archive_boundary_gate": true,
+    "sources_archive_boundary_gate": true,
+    "adapter_api_migration_boundary_gate": true,
+    "exact_feature_backport_runtime_identity_gate": true,
+    "gradle_9_6_1_clean_builds": 2,
+    "consumer_tests_passed": 4,
+    "package_normalized_preserved_class_bytecode": "11/11",
+    "gallery_integrity": true,
+    "checkstyle": true,
+    "actionlint": true
   }
 }
