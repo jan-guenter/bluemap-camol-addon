@@ -1,25 +1,52 @@
 {
-  "schema": 1,
-  "projectLicense": "MIT",
-  "inputs": [
+  "artifacts": [
     {
-      "name": "BlueMap",
-      "version": "5.22-agent.backport-5.22-mc1.21.1-2",
-      "commit": "9be321df995a1103808621d529eb72773e719d4d",
-      "license": "MIT",
-      "lane": "runtime-interface",
-      "bundled": false,
-      "note": "ResourcePack keeps extensions in an unordered map. The add-on uses the first post-load block-state or block-property callback as the boundary after all extension bake calls."
-    },
-    {
-      "name": "Camol",
-      "version": "1.21.1-0.3.1",
+      "curseforge_file": 7976624,
+      "curseforge_project": 1214396,
+      "download_url": "https://www.curseforge.com/api/v1/mods/1214396/files/7976624/download",
+      "evidence": "All the Mons 1.2.0 manifest pins CurseForge 1214396/7976624; the exact runtime JAR was independently filename-, size-, SHA-1-, SHA-256-, metadata-, and descriptor-verified",
+      "evidence_tier": "T2_ARTIFACT_EXACT",
+      "file_name": "camol-1.21.1-0.3.1.jar",
+      "key": "camol",
+      "license": "LicenseRef-All-Rights-Reserved",
+      "mod_id": "camol",
+      "redistributed": false,
+      "sha1": "1f5107b1fe0465d97802b792bcfd39e3221a7ba2",
       "sha256": "aafdbe962a4bbab97207f747ec52561ea34be9c49a4b044a835da82ff7d45609",
       "size": 62188,
-      "license": "LicenseRef-All-Rights-Reserved",
-      "lane": "resource-interpreter",
-      "bundled": false,
-      "note": "Independent decoder for operator-owned persisted chunk attachment data."
+      "version": "1.21.1-0.3.1"
     }
-  ]
+  ],
+  "bluemap": {
+    "api_commit": "285c9a60eff3ac2b0cab308ce1058d1565be0971",
+    "commit": "7e07f4e74ec1e92a6ead9aa1e66054af3e133aac",
+    "license": "MIT",
+    "redistributed": false,
+    "tested_jar_sha256": "86a0323d24f472e425dda4d4e6bba2d7d8ce8315ad009930a67131128c715e62",
+    "tested_jar_size": 6545661,
+    "version": "5.22-feature.backport-5.23-stateless-java-web-server-46"
+  },
+  "pack": {
+    "commit": "c7bb230f21d14d26859d0b92548f089b3a493ad9",
+    "minecraft": "1.21.1",
+    "name": "All the Mons",
+    "neoforge": "21.1.248",
+    "version": "1.2.0"
+  },
+  "profile": "camol-0.3.1-mc1.21.1",
+  "schema": 1,
+  "shared_adapter_api_module": {
+    "artifact_bundled": false,
+    "commit": "e81f08bc4bfbf02d810ec8949a019130e2e61634",
+    "declared_license": "MIT",
+    "integration": "exact gitlink-pinned sources compiled into the consumer",
+    "project": "BlueMap Add-on Adapter API",
+    "repository": "https://github.com/jan-guenter/bluemap-addon-adapter-api",
+    "scope": "BlueMapRuntimeCompatibility, RegistryGuard, ResourceExtensionType and SyntheticDispatch",
+    "source_tree": "2f974c9bb2ba13888d69682f86f30f58922d30eb",
+    "status": "released",
+    "tag": "v0.1.0-alpha.2",
+    "version": "0.1.0-alpha.2"
+  },
+  "source_use": "The add-on decodes operator-owned persisted chunk attachment data and uses installed resource-pack models only; no Camol binary, class, asset, source, world, or captured mesh is packaged."
 }
